@@ -54,7 +54,7 @@ const textapi = new aylien({
 //   );
 // });
 
-console.log(process.env.PORT);
+console.log(process.env.API_ID);
 
 // Designates what port the app will listen to for incoming requests
 const port = 8081;
