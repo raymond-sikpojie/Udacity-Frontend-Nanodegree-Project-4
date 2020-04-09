@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({ path: "../../.env" });
 
 var path = require("path");
 const express = require("express");
@@ -19,7 +19,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// console.log(__dirname);
+// console.log(path.join(__dirname, "../../.env"));
 
 app.get("/", function (req, res) {
   //  res.sendFile("dist/index.html");
@@ -38,23 +38,23 @@ const textapi = new aylien({
   application_key: process.env.API_KEY,
 });
 
-// app.get("/", function (req, res) {
-//   textapi.sentiment(
-//     {
-//       text: "John is a very good football player!",
-//     },
-//     function (error, response) {
-//       if (error === null) {
-//         console.log(response);
-//         // res.send(response);
-//       } else {
-//         console.log(error);
-//       }
-//     }
-//   );
-// });
+app.get("/analysis", function (req, res) {
+  textapi.sentiment(
+    {
+      text: "John is a very good football player!",
+    },
+    function (error, response) {
+      if (error === null) {
+        // console.log(response);
+        res.send(response);
+      } else {
+        console.log(error);
+      }
+    }
+  );
+});
 
-console.log(process.env.API_ID);
+// console.log(process.env.API_KEY);
 
 // Designates what port the app will listen to for incoming requests
 const port = 8081;
