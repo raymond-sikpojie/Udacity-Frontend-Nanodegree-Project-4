@@ -1,0 +1,15 @@
+@import "base";
+@import "footer";
+@import "form";
+@import "header";
+// @import "resets";
+$primary-color: rgb(156, 82, 82);
+.results {
+  text-align: center;
+  background-color: rgba(32, 178, 171, 0.178);
+  padding: 20px;
+  margin: 10px;
+  font-size: 1.3em;
+  min-height: 200%;
+  color: $primary-color;
+}

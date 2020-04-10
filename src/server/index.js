@@ -3,12 +3,10 @@ dotenv.config({ path: "../../.env" });
 
 var path = require("path");
 const express = require("express");
-const mockAPIResponse = require("./mockAPI.js");
 
 const app = express();
 
-// app.use(express.static('dist'))
-app.use(express.static("src/client"));
+// app.use(express.static("src/client"));
 
 // Cors for cross origin allowance
 const cors = require("cors");
@@ -19,14 +17,16 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// console.log(path.join(__dirname, "../../.env"));
+const directoryPath = path.join(__dirname, "../client/views");
+console.log(directoryPath);
+
+// Specify the directory from where to load files
+app.use(express.static(path.join(__dirname, "../../dist")));
+// app.use(express.static(directoryPath));
 
 app.get("/", function (req, res) {
-  //  res.sendFile("dist/index.html");
-  //   res.sendFile(path.resolve('src/client/views/index.html'))
-  //   res.sendFile("./client/views/index.html");
-  res.sendFile(path.join(__dirname, "../client/views/index.html"));
-  console.log("response sent");
+  // res.sendFile(path.join(__dirname, "../client/views/index.html"));
+  // res.sendFile("index.html");
 });
 
 //Require the Aylien npm package
@@ -38,14 +38,24 @@ const textapi = new aylien({
   application_key: process.env.API_KEY,
 });
 
+//Variable which holds the data from POST request
+const appData = {};
+
+// POST Request which collects the form input data
+app.post("/inputData", (req, res) => {
+  console.log("text/url received");
+  appData.text = req.body.text;
+});
+
+// GET Request from Aylien Api
 app.get("/analysis", function (req, res) {
   textapi.sentiment(
     {
-      text: "John is a very good football player!",
+      text: appData.text,
     },
     function (error, response) {
       if (error === null) {
-        // console.log(response);
+        console.log("response  sent");
         res.send(response);
       } else {
         console.log(error);
@@ -54,14 +64,8 @@ app.get("/analysis", function (req, res) {
   );
 });
 
-// console.log(process.env.API_KEY);
-
 // Designates what port the app will listen to for incoming requests
 const port = 8081;
 app.listen(port, function () {
-  console.log(`Example app listening on port ${port}!`);
-});
-
-app.get("/test", function (req, res) {
-  res.send(mockAPIResponse);
+  console.log(`Server running on port ${port}`);
 });

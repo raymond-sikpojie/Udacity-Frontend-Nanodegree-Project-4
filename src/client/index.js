@@ -1,11 +1,5 @@
-import { checkForName } from "./js/nameChecker";
+import { checkForSentence } from "./js/sentenceChecker";
 import { handleSubmit } from "./js/formHandler";
+import "./styles/style.scss";
 
-const proxy = "https://cors-anywhere.herokuapp.com/";
-
-// console.log(checkForName);
-let form = document.querySelector(".form");
-
-form.addEventListener("click", handleSubmit);
-
-console.log("CHANGE");
+export { checkForSentence, handleSubmit };
