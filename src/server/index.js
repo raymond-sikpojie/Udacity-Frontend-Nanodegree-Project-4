@@ -21,8 +21,8 @@ const directoryPath = path.join(__dirname, "../client/views");
 console.log(directoryPath);
 
 // Specify the directory from where to load files
-app.use(express.static(path.join(__dirname, "../../dist")));
-// app.use(express.static(directoryPath));
+// app.use(express.static(path.join(__dirname, "../../dist")));
+app.use(express.static(directoryPath));
 
 app.get("/", function (req, res) {
   // res.sendFile(path.join(__dirname, "../client/views/index.html"));
