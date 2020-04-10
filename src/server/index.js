@@ -6,8 +6,6 @@ const express = require("express");
 
 const app = express();
 
-// app.use(express.static("src/client"));
-
 // Cors for cross origin allowance
 const cors = require("cors");
 app.use(cors());
@@ -21,13 +19,7 @@ const directoryPath = path.join(__dirname, "../client/views");
 console.log(directoryPath);
 
 // Specify the directory from where to load files
-// app.use(express.static(path.join(__dirname, "../../dist")));
-app.use(express.static(directoryPath));
-
-app.get("/", function (req, res) {
-  // res.sendFile(path.join(__dirname, "../client/views/index.html"));
-  // res.sendFile("index.html");
-});
+app.use(express.static("dist"));
 
 //Require the Aylien npm package
 const aylien = require("aylien_textapi");
