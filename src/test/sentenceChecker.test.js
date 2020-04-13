@@ -1,5 +1,5 @@
 import { checkForSentence } from "../client/js/sentenceChecker";
 
-test("sentenceChecker should be defined", () => {
+test("should be defined", () => {
   expect(checkForSentence).toBeDefined();
 });
