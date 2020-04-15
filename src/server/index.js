@@ -15,9 +15,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const directoryPath = path.join(__dirname, "../client/views");
-console.log(directoryPath);
-
 // Specify the directory from where to load files
 app.use(express.static("dist"));
 
